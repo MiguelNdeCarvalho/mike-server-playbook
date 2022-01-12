@@ -1,8 +1,11 @@
 {
-  "enabled": true,
-  "semanticCommits": "enabled",
-  "dependencyDashboard": true,
-  "dependencyDashboardTitle": "Renovate Dashboard",
-  "suppressNotifications": ["prIgnoreNotification"],
-  "rebaseWhen": "conflicted"
+    "dependencyDashboard": true,
+    "dependencyDashboardTitle": "Renovate Dashboard",
+    "enabled": true,
+    "rebaseWhen": "conflicted",
+    "semanticCommits": "enabled",
+    "suppressNotifications": [
+        "prIgnoreNotification"
+    ],
+    "timezone": "Europe/Lisbon"
 }
