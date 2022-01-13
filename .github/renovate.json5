@@ -7,5 +7,16 @@
     "suppressNotifications": [
         "prIgnoreNotification"
     ],
-    "timezone": "Europe/Lisbon"
+    "timezone": "Europe/Lisbon",
+    "packageRules": [
+        {
+            "matchDatasources": [
+                "docker"
+            ],
+            "versioning": "loose",
+            "matchPackageNames": [
+                "ghcr.io/linuxserver/sonarr"
+            ]
+        }
+    ]
 }
