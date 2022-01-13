@@ -15,7 +15,8 @@
             ],
             "versioning": "loose",
             "matchPackageNames": [
-                "ghcr.io/linuxserver/sonarr"
+                "ghcr.io/linuxserver/sonarr",
+                "ghcr.io/hotio/qbittorrent",
             ]
         }
     ]
