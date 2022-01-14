@@ -13,7 +13,7 @@
             "matchDatasources": [
                 "docker"
             ],
-            "versioning": "loose",
+            "versioning": "regex:?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\-(?<build>\\d+)?$",
             "matchPackageNames": [
                 "ghcr.io/linuxserver/sonarr"
             ]
