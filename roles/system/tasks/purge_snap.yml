@@ -1,13 +1,10 @@
 ---
-- name: "Check if snap package is installed"
-  ansible.builtin.package:
-    name: snapd
-    state: present
-  check_mode: true
-  register: snap_check
+- name: "Check if snap is installed"
+  package_facts:
+    manager: "auto"
 
 - name: Fully purge Snap
-  when: snap_check is succeeded
+  when: "'snapd' in ansible_facts.packages"
   block:
   - name: Unmount the core* snaps
     ansible.posix.mount:
