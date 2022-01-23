@@ -4,4 +4,25 @@
     name: sonarr
     image: ghcr.io/linuxserver/sonarr:3.0.6.1342-ls131
     state: started
+    env:
+      "PUID": 1002
+      "PGID": 1002
+      "TZ": "Europe/Lisbon"
+    hostname: {{ ansible_hostname }}
+    mounts:
+      - source: /app/sonarr
+        target: /config
+        type: bind
+        read_only: false
+      - source: /media/downloads
+        target: /media/downloads
+        type: bind
+        read_only: false
+      - source: /media/tv
+        target: /media/tv
+        type: bind
+        read_only: false
+    networks:
+      - name: media
+      - name: proxy
     restart_policy: unless-stopped
