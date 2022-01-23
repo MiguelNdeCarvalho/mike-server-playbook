@@ -1,0 +1,4 @@
+---
+- name: Create media network
+  community.docker.docker_network:
+    name: media
