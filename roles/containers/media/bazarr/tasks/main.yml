@@ -1,0 +1,28 @@
+---
+- name: Create Bazarr container
+  community.docker.docker_container:
+    name: bazarr
+    image: ghcr.io/linuxserver/bazarr:1.0.2
+    state: started
+    env:
+      "PUID": 1002
+      "PGID": 1002
+      "TZ": "Europe/Lisbon"
+    hostname: {{ ansible_hostname }}
+    mounts:
+      - source: /app/bazarr
+        target: /config
+        type: bind
+        read_only: false
+      - source: /media/movies
+        target: /media/movies
+        type: bind
+        read_only: false
+      - source: /media/tv
+        target: /media/tv
+        type: bind
+        read_only: false
+    networks:
+      - name: media
+      - name: proxy
+    restart_policy: unless-stopped
