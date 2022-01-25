@@ -1,0 +1,17 @@
+---
+- name: Create Doplarr container
+  community.docker.docker_container:
+    name: doplarr
+    image: ghcr.io/kiranshila/doplarr:v3.2.2
+    state: started
+    env:
+      "TZ": "Europe/Lisbon"
+      "DISCORD__ROLE_ID": "id"
+      "DISCORD__TOKEN": "token"
+      "OVERSEERR__DEFAULT_ID": "id"
+      "OVERSEERR__URL": "http://overseerr:5055"
+      "OVERSEERR__API": "api"
+    hostname: {{ ansible_hostname }}
+    networks:
+      - name: media
+    restart_policy: unless-stopped
