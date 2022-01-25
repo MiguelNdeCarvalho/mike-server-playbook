@@ -1,0 +1,28 @@
+---
+- name: Create Radarr container
+  community.docker.docker_container:
+    name: radarr
+    image: ghcr.io/linuxserver/radarr:3.2.2.5080-ls129
+    state: started
+    env:
+      "PUID": 1002
+      "PGID": 1002
+      "TZ": "Europe/Lisbon"
+    hostname: {{ ansible_hostname }}
+    mounts:
+      - source: /app/radarr
+        target: /config
+        type: bind
+        read_only: false
+      - source: /media/downloads
+        target: /media/downloads
+        type: bind
+        read_only: false
+      - source: /media/movies
+        target: /media/movies
+        type: bind
+        read_only: false
+    networks:
+      - name: media
+      - name: proxy
+    restart_policy: unless-stopped
