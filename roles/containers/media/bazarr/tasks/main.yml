@@ -1,4 +1,9 @@
 ---
+- name: Create Bazarr config folder
+  ansible.builtin.file:
+    path: "{{ config_dir }}}/bazarr"
+    state: directory
+
 - name: Create Bazarr container
   community.docker.docker_container:
     name: bazarr
@@ -10,7 +15,7 @@
       "TZ": "Europe/Lisbon"
     hostname: {{ ansible_hostname }}
     mounts:
-      - source: /app/bazarr
+      - source: "{{ config_dir }}}/bazarr"
         target: /config
         type: bind
         read_only: false

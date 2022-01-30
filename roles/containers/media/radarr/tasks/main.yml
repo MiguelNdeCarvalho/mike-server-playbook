@@ -1,4 +1,9 @@
 ---
+- name: Create Radarr config folder
+  ansible.builtin.file:
+    path: "{{ config_dir }}}/radarr"
+    state: directory
+
 - name: Create Radarr container
   community.docker.docker_container:
     name: radarr
@@ -10,7 +15,7 @@
       "TZ": "Europe/Lisbon"
     hostname: {{ ansible_hostname }}
     mounts:
-      - source: /app/radarr
+      - source: "{{ config_dir }}}/radarr"
         target: /config
         type: bind
         read_only: false

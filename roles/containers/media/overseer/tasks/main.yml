@@ -1,4 +1,9 @@
 ---
+- name: Create Overseer config folder
+  ansible.builtin.file:
+    path: "{{ config_dir }}}/overseer"
+    state: directory
+
 - name: Create Overseer container
   community.docker.docker_container:
     name: overseer
@@ -10,7 +15,7 @@
       "TZ": "Europe/Lisbon"
     hostname: {{ ansible_hostname }}
     mounts:
-      - source: /app/overseerr
+      - source: "{{ config_dir }}}/overseer"
         target: /config
         type: bind
         read_only: false

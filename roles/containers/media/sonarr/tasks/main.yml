@@ -1,4 +1,9 @@
 ---
+- name: Create Sonarr config folder
+  ansible.builtin.file:
+    path: "{{ config_dir }}}/sonarr"
+    state: directory
+
 - name: Create Sonarr container
   community.docker.docker_container:
     name: sonarr
@@ -10,7 +15,7 @@
       "TZ": "Europe/Lisbon"
     hostname: {{ ansible_hostname }}
     mounts:
-      - source: /app/sonarr
+      - source: "{{ config_dir }}}/sonarr"
         target: /config
         type: bind
         read_only: false
