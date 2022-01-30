@@ -1,0 +1,25 @@
+---
+- name: Create Plex-Trakt-Sync config folder
+  ansible.builtin.file:
+    path: "{{ config_dir }}}/plex-trakt-sync"
+    state: directory
+    mode: "0755"
+
+- name: Create Plex-Trakt-Sync container
+  community.docker.docker_container:
+    name: plex-trakt-sync
+    image: ghcr.io/taxel/plextraktsync:0.18.15
+    state: started
+    env:
+      "PUID": 1002
+      "PGID": 1002
+      "TZ": "Europe/Lisbon"
+    hostname: "{{ ansible_hostname }}"
+    mounts:
+      - source: "{{ config_dir }}}/plexarr"
+        target: /config
+        type: bind
+        read_only: false
+    networks:
+      - name: media
+    restart_policy: unless-stopped
