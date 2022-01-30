@@ -3,6 +3,7 @@
   ansible.builtin.file:
     path: "{{ config_dir }}}/qbittorrent"
     state: directory
+    mode: "0755"
 
 - name: Create Qbittorrent container
   community.docker.docker_container:
@@ -16,7 +17,7 @@
       "VPN_ENABLED": "true"
       "VPN_CONF": "wg0"
       "VPN_LAN_NETWORK": "192.168.0.0/24"
-    hostname: {{ ansible_hostname }}
+    hostname: "{{ ansible_hostname }}"
     mounts:
       - source: "{{ config_dir }}}/qbittorrent"
         target: /config

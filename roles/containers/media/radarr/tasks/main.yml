@@ -3,6 +3,7 @@
   ansible.builtin.file:
     path: "{{ config_dir }}}/radarr"
     state: directory
+    mode: "0755"
 
 - name: Create Radarr container
   community.docker.docker_container:
@@ -13,7 +14,7 @@
       "PUID": 1002
       "PGID": 1002
       "TZ": "Europe/Lisbon"
-    hostname: {{ ansible_hostname }}
+    hostname: "{{ ansible_hostname }}"
     mounts:
       - source: "{{ config_dir }}}/radarr"
         target: /config

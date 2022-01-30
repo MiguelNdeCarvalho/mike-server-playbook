@@ -11,7 +11,7 @@
       "OVERSEERR__DEFAULT_ID": "id"
       "OVERSEERR__URL": "http://overseerr:5055"
       "OVERSEERR__API": "api"
-    hostname: {{ ansible_hostname }}
+    hostname: "{{ ansible_hostname }}"
     networks:
       - name: media
     restart_policy: unless-stopped
