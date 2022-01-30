@@ -1,0 +1,33 @@
+---
+- name: Create Autoscan config folder
+  ansible.builtin.file:
+    path: "{{ config_dir }}}/autoscan"
+    state: directory
+
+- name: Create Autoscan container
+  community.docker.docker_container:
+    name: Autoscan
+    image: ghcr.io/hotio/autoscan:release-1.2.0
+    state: started
+    env:
+      "PUID": 1002
+      "PGID": 1002
+      "TZ": "Europe/Lisbon"
+    hostname: {{ ansible_hostname }}
+    mounts:
+      - source: "{{ config_dir }}}/bazarr"
+        target: /config
+        type: bind
+        read_only: false
+      - source: /media/movies
+        target: /media/movies
+        type: bind
+        read_only: false
+      - source: /media/tv
+        target: /media/tv
+        type: bind
+        read_only: false
+    networks:
+      - name: media
+      - name: proxy
+    restart_policy: unless-stopped
