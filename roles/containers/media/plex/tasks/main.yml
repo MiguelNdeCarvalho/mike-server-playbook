@@ -1,0 +1,32 @@
+---
+- name: Create Plex config folder
+  ansible.builtin.file:
+    path: "{{ config_dir }}}/plex"
+    state: directory
+    mode: "0755"
+
+- name: Create Plex container
+  community.docker.docker_container:
+    name: plex
+    image: ghcr.io/linuxserver/plex:version-1.25.3.5409-f11334058
+    state: started
+    env:
+      "PUID": 1002
+      "PGID": 1002
+      "TZ": "Europe/Lisbon"
+    hostname: "{{ ansible_hostname }}"
+    mounts:
+      - source: "{{ config_dir }}}/plex"
+        target: /config
+        type: bind
+        read_only: false
+      - source: /media/movies
+        target: /media/movies
+        type: bind
+        read_only: false
+      - source: /media/tv
+        target: /media/tv
+        type: bind
+        read_only: false
+    network_mode: host
+    restart_policy: unless-stopped
