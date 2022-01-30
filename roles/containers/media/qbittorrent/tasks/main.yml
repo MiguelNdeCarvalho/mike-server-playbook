@@ -1,7 +1,41 @@
 ---
+- name: Create Qbittorrent config folder
+  ansible.builtin.file:
+    path: "{{ config_dir }}}/qbittorrent"
+    state: directory
+
 - name: Create Qbittorrent container
   community.docker.docker_container:
     name: qbittorrent
     image: ghcr.io/hotio/qbittorrent:release-4.3.9
     state: started
+    env:
+      "PUID": 1002
+      "PGID": 1002
+      "TZ": "Europe/Lisbon"
+      "VPN_ENABLED": "true"
+      "VPN_CONF": "wg0"
+      "VPN_LAN_NETWORK": "192.168.0.0/24"
+    hostname: {{ ansible_hostname }}
+    mounts:
+      - source: "{{ config_dir }}}/qbittorrent"
+        target: /config
+        type: bind
+        read_only: false
+      - source: /media/downloads
+        target: /media/downloads
+        type: bind
+        read_only: false
+      - source: /media/tv
+        target: /media/tv
+        type: bind
+        read_only: false
+    capabilities:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark: 1
+      - net.ipv6.conf.all.disable_ipv6: 0
+    networks:
+      - name: media
+      - name: proxy
     restart_policy: unless-stopped
