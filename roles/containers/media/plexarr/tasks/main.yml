@@ -1,0 +1,33 @@
+---
+- name: Create Plexarr config folder
+  ansible.builtin.file:
+    path: "{{ config_dir }}}/plexarr"
+    state: directory
+    mode: "0755"
+
+- name: Create Plexarr container
+  community.docker.docker_container:
+    name: plexarr
+    image: ghcr.io/hotio/plexarr:release-1.2.0
+    state: started
+    env:
+      "PUID": 1002
+      "PGID": 1002
+      "TZ": "Europe/Lisbon"
+    hostname: "{{ ansible_hostname }}"
+    mounts:
+      - source: "{{ config_dir }}}/plexarr"
+        target: /config
+        type: bind
+        read_only: false
+      - source: /media/movies
+        target: /media/movies
+        type: bind
+        read_only: false
+      - source: /media/tv
+        target: /media/tv
+        type: bind
+        read_only: false
+    networks:
+      - name: media
+    restart_policy: unless-stopped
