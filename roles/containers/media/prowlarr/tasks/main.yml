@@ -1,0 +1,26 @@
+---
+- name: Create Prowlarr config folder
+  ansible.builtin.file:
+    path: "{{ config_dir }}}/prowlarr"
+    state: directory
+    mode: "0755"
+
+- name: Create Prowlarr container
+  community.docker.docker_container:
+    name: prowlarr
+    image: ghcr.io/hotio/prowlarr:testing-0.2.0.1426
+    state: started
+    env:
+      "PUID": 1002
+      "PGID": 1002
+      "TZ": "Europe/Lisbon"
+    hostname: "{{ ansible_hostname }}"
+    mounts:
+      - source: "{{ config_dir }}}/prowlarr"
+        target: /config
+        type: bind
+        read_only: false
+    networks:
+      - name: media
+      - name: proxy
+    restart_policy: unless-stopped
