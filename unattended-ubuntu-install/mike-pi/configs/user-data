@@ -1,3 +1,5 @@
+#cloud-config
+
 # Set machine Hostname
 hostname: mike-pi
 
