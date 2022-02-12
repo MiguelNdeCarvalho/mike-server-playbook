@@ -44,3 +44,6 @@ dtoverlay=dwc2
 over_voltage=8
 arm_freq=2200
 force_turbo=1
+
+# Server Config
+gpu_mem=16
