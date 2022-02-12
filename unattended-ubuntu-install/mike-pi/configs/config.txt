@@ -3,11 +3,6 @@ kernel=vmlinuz
 cmdline=cmdline.txt
 initramfs initrd.img followkernel
 
-[cm4]
-# Enable the USB2 outputs on the IO board (assuming your CM4 is plugged into
-# such a board)
-dtoverlay=dwc2,dr_mode=host
-
 [pi4]
 max_framebuffers=2
 arm_boost=1
@@ -47,3 +42,6 @@ force_turbo=1
 
 # Server Config
 gpu_mem=16
+
+# Enable DeskpiPro FAN control
+dtoverlay=dwc2,dr_mode=host
