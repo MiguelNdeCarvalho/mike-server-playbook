@@ -6,9 +6,13 @@ hostname: mike-pi
 # Add my user
 users:
   - name: mike
+    gecos: MiguelNdeCarvalho
     sudo: ALL=(ALL) ALL
+    primary_group: mike
+    groups: adm, cdrom, sudo, dip, plugdev, lpadmin, sambashare
     ssh_import_id:
       - gh:MiguelNdeCarvalho
+    passwd: #change
 
 # Disable password authentication with the SSH daemon
 ssh_pwauth: false
