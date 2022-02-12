@@ -7,12 +7,13 @@ hostname: mike-pi
 users:
   - name: mike
     gecos: MiguelNdeCarvalho
-    sudo: ALL=(ALL) ALL
-    primary_group: mike
     groups: adm, cdrom, sudo, dip, plugdev, lpadmin, sambashare
+    passwd: #change
+    primary_group: mike
+    shell: /bin/bash
     ssh_import_id:
       - gh:MiguelNdeCarvalho
-    passwd: #change
+    sudo: ALL=(ALL) ALL
 
 # Disable password authentication with the SSH daemon
 ssh_pwauth: false
