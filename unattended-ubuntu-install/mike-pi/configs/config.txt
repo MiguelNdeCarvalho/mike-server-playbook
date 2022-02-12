@@ -36,7 +36,7 @@ arm_64bit=1
 dtoverlay=dwc2
 
 # Overclock to 2.2GHz
-over_voltage=8
+over_voltage=6
 arm_freq=2200
 force_turbo=1
 
