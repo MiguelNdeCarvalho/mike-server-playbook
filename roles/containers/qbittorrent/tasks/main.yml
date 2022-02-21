@@ -2,6 +2,6 @@
 - name: Create Qbittorrent container
   community.docker.docker_container:
     name: qbittorrent
-    image: ghcr.io/hotio/qbittorrent:release-4.3.9
+    image: ghcr.io/hotio/qbittorrent:release-4.4.1
     state: started
     restart_policy: unless-stopped
