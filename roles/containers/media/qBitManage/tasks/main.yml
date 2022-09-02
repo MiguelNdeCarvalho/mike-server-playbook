@@ -1,0 +1,25 @@
+---
+- name: Create qBitManage config folder
+  ansible.builtin.file:
+    path: "{{ config_dir }}}/qBitManage"
+    state: directory
+    mode: "0755"
+
+- name: Create qBitManage container
+  community.docker.docker_container:
+    name: qBitManage
+    image: ghcr.io/hotio/qbitmanage:release-3.2.5
+    state: started
+    env:
+      "PUID": 1002
+      "PGID": 1002
+      "TZ": "Europe/Lisbon"
+    hostname: "{{ ansible_hostname }}"
+    mounts:
+      - source: "{{ config_dir }}}/qBitManage"
+        target: /config
+        type: bind
+        read_only: false
+    networks:
+      - name: media
+    restart_policy: unless-stopped
