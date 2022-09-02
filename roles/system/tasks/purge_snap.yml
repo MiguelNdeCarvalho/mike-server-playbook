@@ -1,6 +1,6 @@
 ---
 - name: "Check if snap is installed"
-  package_facts:
+  ansible.builtin.package_facts:
     manager: "auto"
 
 - name: Fully purge Snap
