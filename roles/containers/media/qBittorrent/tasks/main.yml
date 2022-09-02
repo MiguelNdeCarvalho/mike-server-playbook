@@ -1,14 +1,14 @@
 ---
-- name: Create Qbittorrent config folder
+- name: Create qBittorrent config folder
   ansible.builtin.file:
-    path: "{{ config_dir }}}/qbittorrent"
+    path: "{{ config_dir }}}/qBittorrent"
     state: directory
     mode: "0755"
 
-- name: Create Qbittorrent container
+- name: Create qBittorrent container
   community.docker.docker_container:
-    name: qbittorrent
-    image: ghcr.io/hotio/qbittorrent:release-4.3.9
+    name: qBittorrent
+    image: ghcr.io/hotio/qBittorrent:release-4.3.9
     state: started
     env:
       "PUID": 1002
@@ -19,7 +19,7 @@
       "VPN_LAN_NETWORK": "192.168.0.0/24"
     hostname: "{{ ansible_hostname }}"
     mounts:
-      - source: "{{ config_dir }}}/qbittorrent"
+      - source: "{{ config_dir }}}/qBittorrent"
         target: /config
         type: bind
         read_only: false
