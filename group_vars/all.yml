@@ -4,3 +4,6 @@ my_user: "mike" # My users that has been created earlier by CloudInit
 
 # Groups section
 data_group: "mike-data" # Group that owns the data and configs
+
+# Locations section
+configs_location: "/etc/containers-configs" # Where configs of containers will be stored

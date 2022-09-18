@@ -8,3 +8,10 @@
     name: "{{ my_user }}"
     groups: "{{ data_group }}"
     append: true
+
+- name: Create configs folder containers (inside root device)
+  ansible.builtin.file:
+    path: "{{ configs_location }}"
+    state: directory
+    group: "{{ data_group }}"
+    mode: "0770"
