@@ -13,5 +13,6 @@
   ansible.builtin.include_role:
     name: geerlingguy.docker
   vars:
-    docker_install_compose: false
     docker_apt_arch: "{{ architecture.stdout }}"
+    docker_install_compose: false
+    docker_users: ["{{ my_user }}"]
