@@ -1,0 +1,10 @@
+---
+- name: Create data group responsible for storage
+  ansible.builtin.group:
+    name: "{{ data_group }}"
+
+- name: Add my user to the data group
+  ansible.builtin.user:
+    name: "{{ my_user }}"
+    groups: "{{ data_group }}"
+    append: true
