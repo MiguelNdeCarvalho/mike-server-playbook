@@ -1,19 +1,17 @@
 ---
 - name: "Check if Docker is installed"
-  package_facts:
+  ansible.builtin.package_facts:
     manager: "auto"
 
-- name: Install Docker
+- name: "Get System Architecture"
+  ansible.builtin.command:
+    cmd: dpkg --print-architecture
+  register: architecture
   when: "'docker' not in ansible_facts.packages"
-  block:
-  - name: Get System Architecture
-    command: dpkg --print-architecture
-    register: architecture
 
-  - name: Install Docker
-    ansible.builtin.include_role:
-      name: geerlingguy.docker
-    vars:
-      docker_install_compose: false
-      docker_apt_arch: "{{ architecture.stdout }}"
-      docker_apt_repository: "deb [arch={{ docker_apt_arch }}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} impish {{ docker_apt_release_channel }}"
+- name: Install Docker
+  ansible.builtin.include_role:
+    name: geerlingguy.docker
+  vars:
+    docker_install_compose: false
+    docker_apt_arch: "{{ architecture.stdout }}"
