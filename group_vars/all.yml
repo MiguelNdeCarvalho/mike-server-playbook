@@ -1,2 +1,3 @@
-# My users that has been created earlier by CloudInit
-my_user: "mike"
+# Users section
+docker_user: "jarvis" # User responsible for running the containers
+my_user: "mike" # My users that has been created earlier by CloudInit
