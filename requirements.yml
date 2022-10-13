@@ -1,6 +1,7 @@
 ---
 roles:
     - name: geerlingguy.docker
+    - name: mrlesmithjr.zfs
 
 collections:
     - name: community.docker
