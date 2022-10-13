@@ -10,3 +10,9 @@ data_group: "mike-data" # Group that owns the data and configs
 
 # Locations section
 configs_location: "/etc/containers-configs" # Where configs of containers will be stored
+
+# ZFS Options
+pool_disks_ids: # TODO:Dummy IDs
+  - ata-INTEL_SSDSC2BW240A4_CVDA352100YL2403GN
+  - ata-INTEL_SSDSC2BW240A4_CVDA352100YL2403GN
+  - ata-INTEL_SSDSC2BW240A4_CVDA352100YL2403GN
