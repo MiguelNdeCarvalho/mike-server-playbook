@@ -15,3 +15,26 @@
     state: directory
     group: "{{ data_group }}"
     mode: "0770"
+
+- name: Create Tank Pool
+  ansible.builtin.include_role:
+    name: mrlesmithjr.zfs
+  vars:
+    zfs_create_pools: true
+    zfs_pools:
+      - name: Tank
+        action: create
+        atime: 'off'
+        compression: lz4
+        devices: {{ pool_disks_ids }}
+        type: raidz
+        state: present
+    zfs_pools_scrub_cron: # Run every Monday at 04:00
+      minute: 0
+      hour: 4
+      day: "*"
+      month: "*"
+      weekday: sun
+    zfs_enable_monitoring: true
+    zfs_monitoring_email_dest: {{ my_email }}
+  when: inventory_hostname == 'your_inventory_name'
