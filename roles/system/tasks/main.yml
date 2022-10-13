@@ -1,4 +1,7 @@
 ---
-- ansible.builtin.include_tasks: purge_snap.yml
-- ansible.builtin.include_tasks: docker.yml
-- ansible.builtin.include_tasks: storage.yml
+- name: Purge Snap
+  ansible.builtin.include_tasks: purge_snap.yml
+- name: Install Docker
+  ansible.builtin.include_tasks: docker.yml
+- name: Setup Storage
+  ansible.builtin.include_tasks: storage.yml
