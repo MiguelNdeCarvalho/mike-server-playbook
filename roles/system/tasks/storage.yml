@@ -37,4 +37,4 @@
       weekday: sun
     zfs_enable_monitoring: true
     zfs_monitoring_email_dest: {{ my_email }}
-  when: inventory_hostname == 'your_inventory_name'
+  when: inventory_hostname == 'mike-server'
