@@ -2,6 +2,6 @@
 - name: Create Speedtest-exporter container
   community.docker.docker_container:
     name: sonarr
-    image: ghcr.io/miguelndecarvalho/speedtest-exporter:v3.4.1
+    image: ghcr.io/miguelndecarvalho/speedtest-exporter:v3.5.4
     state: started
     restart_policy: unless-stopped
