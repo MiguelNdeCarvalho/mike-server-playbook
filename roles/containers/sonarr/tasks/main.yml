@@ -2,6 +2,6 @@
 - name: Create Sonarr container
   community.docker.docker_container:
     name: sonarr
-    image: ghcr.io/linuxserver/sonarr:3.0.10.1567-ls200
+    image: ghcr.io/linuxserver/sonarr:4.0.1.929-ls226
     state: started
     restart_policy: unless-stopped
